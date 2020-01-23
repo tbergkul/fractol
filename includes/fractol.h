@@ -78,8 +78,26 @@ typedef struct	s_fractol
 	int			z;
 	int			a;
 	int			b;
+
 	int			test;//
+	int			testy;
+	float		left;
+	float		top;
+	float		xside;
+	float		yside;
+	float		xscale;
+	float		yscale;
+	float		zx;
+	float		zy;
+	float		cx;
+	float		cy;
+	float		tempx;
+	int			maxx;
+	int			maxy;
 }				t_fractol;
+
+void	fractol(t_fractol *f);
+void	begin(t_fractol *f);
 
 int		save_input(char *av, t_fractol *f);
 void	draw_twod(t_fractol *f);
@@ -90,5 +108,4 @@ void	draw_instructions(t_fractol *f);
 int		key_pressed(int key, t_fractol *f);
 int		mouse_button(int key, int x, int y, t_fractol *f);
 int		draw(t_fractol *f);
-
 #endif

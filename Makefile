@@ -6,14 +6,14 @@
 #    By: tbergkul <tbergkul@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/13 14:55:32 by tbergkul          #+#    #+#              #
-#    Updated: 2020/01/22 14:07:03 by tbergkul         ###   ########.fr        #
+#    Updated: 2020/01/23 15:45:05 by tbergkul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 LIB = libft/libft.a
 LIBDIR = libft/
-SRC = main.c draw.c key_pressed.c save_input.c window.c
+SRC = main.c draw.c key_pressed.c save_input.c window.c fractal.c
 SRCDIR = src/
 SRCS = $(addprefix $(SRCDIR),$(SRC))
 MLX = /usr/local/lib/libmlx.a
