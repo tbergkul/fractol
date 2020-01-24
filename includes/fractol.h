@@ -18,8 +18,8 @@
 # include "minilibx/mlx.h"
 # include <stdio.h>//remove
 
-# define WIN_WIDTH 1280
-# define WIN_HEIGHT 720
+// # define WIN_WIDTH 1280
+// # define WIN_HEIGHT 720
 
 # define COLOR_RED 16711680
 # define COLOR_GREEN 65280
@@ -46,6 +46,8 @@
 # define ARROW_DOWN 125
 # define ARROW_UP 126
 
+# define KEY_F 3
+
 # define MOUSE_LEFT 1
 # define MOUSE_RIGHT 2
 # define MOUSE_MIDDLE 3
@@ -66,10 +68,10 @@ typedef struct	s_fractol
 	int			scalex;
 	int			startx;
 	int			starty;
-	int			x1;
-	int			x2;
-	int			y1;
-	int			y2;
+	// int			x1;
+	// int			x2;
+	// int			y1;
+	// int			y2;
 	int			dx;
 	int			dy;
 	int			incx;
@@ -81,31 +83,46 @@ typedef struct	s_fractol
 
 	int			test;//
 	int			testy;
-	float		left;
-	float		top;
-	float		xside;
-	float		yside;
+	float		left;//
+	float		top;//
+	float		xside;//
+	float		yside;//
 	float		xscale;
 	float		yscale;
-	float		zx;
-	float		zy;
-	float		cx;
-	float		cy;
-	float		tempx;
-	int			maxx;
-	int			maxy;
+	float		zr;
+	float		zi;
+	float		cr;
+	float		ci;
+	float		temp;
+	int			fractol;
+	int			width;
+	int			height;
+	int			x;
+	int			y;
+	float		x0;
+	float		x1;
+	float		y0;
+	float		y1;
+	void		*img;
+	void		*img_str;
+	int			endian;
+	int			sl;
+	int			bpp;
+	int			i;
+	int			maxi;
+	int			color;
 }				t_fractol;
 
-void	fractol(t_fractol *f);
+void	draw_fractol(t_fractol *f);
 void	begin(t_fractol *f);
 
-int		save_input(char *av, t_fractol *f);
-void	draw_twod(t_fractol *f);
-int		get_color(int z1, int z2);
-void	bresenham(t_fractol *f, int z1, int z2);
-int		window(t_fractol *f);
+// int		save_input(char *av, t_fractol *f);
+// void	draw_twod(t_fractol *f);
+// int		get_color(int z1, int z2);
+// void	bresenham(t_fractol *f, int z1, int z2);
+// int		window(t_fractol *f);
+// int		draw(t_fractol *f);
 void	draw_instructions(t_fractol *f);
 int		key_pressed(int key, t_fractol *f);
 int		mouse_button(int key, int x, int y, t_fractol *f);
-int		draw(t_fractol *f);
 #endif
