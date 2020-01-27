@@ -6,7 +6,7 @@
 /*   By: tbergkul <tbergkul@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 17:07:28 by tbergkul          #+#    #+#             */
-/*   Updated: 2020/01/24 16:17:32 by tbergkul         ###   ########.fr       */
+/*   Updated: 2020/01/27 11:59:41 by tbergkul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ int		mouse_button(int key, int x, int y, t_fractol *f)
 int		key_pressed(int key, t_fractol *f)
 {
 	if (key == ARROW_UP)
-		f->starty -= 30;
+		f->test -= 30;
 	else if (key == ARROW_LEFT)
-		f->startx -= 30;
+		f->test -= 30;
 	else if (key == ARROW_DOWN)
-		f->starty += 30;
+		f->test += 30;
 	else if (key == ARROW_RIGHT)
-		f->startx += 30;
+		f->test += 30;
 	else if (key == KEY_ESC)
 		exit(0);
 	else if (key == KEY_F)

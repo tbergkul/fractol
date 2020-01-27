@@ -6,13 +6,27 @@
 /*   By: tbergkul <tbergkul@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 13:19:08 by tbergkul          #+#    #+#             */
-/*   Updated: 2020/01/24 16:40:15 by tbergkul         ###   ########.fr       */
+/*   Updated: 2020/01/27 11:51:42 by tbergkul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
 
 void	set_julia(t_fractol *f)
+{
+	f->x0 = -4.0;
+	f->y0 = -2.5;
+	f->x1 = 2.5;
+	f->y1 = 3.0;
+
+	f->cr = -0.63;
+	f->ci = -0.54;
+	f->maxi = 100;
+	f->zoom = 200;
+	f->i = 0;
+}
+
+void	set_mandelbrot(t_fractol *f)
 {
 	// f->left = -1.75;
 	// f->top = -0.25;
@@ -27,27 +41,28 @@ void	set_julia(t_fractol *f)
 	f->x0 = -5.5;
 	f->y0 = -3.25;
 	f->x1 = 2.5;
-	f->y1 = 3;
+	f->y1 = 3.0;
 
-	f->maxi = 30;
+	f->maxi = 40;
 	f->zoom = 150;
 
-	f->xscale = f->x1 / f->width;
-	f->yscale = f->y1 / f->height;
+	f->xscale = f->x1 / f->width;//
+	f->yscale = f->y1 / f->height;//
 }
 
 int		verify_param(t_fractol *f, char *parameter)
 {
-	if (ft_strcmp(parameter, "Julia") == 0)
+	if (ft_strcmp(parameter, "julia") == 0)
 	{
 		f->fractol = 1;
 		set_julia(f);
 	}
-	else if (ft_strcmp(parameter, "Mandelbrot") == 0)
+	else if (ft_strcmp(parameter, "mandelbrot") == 0)
 	{
 		f->fractol = 2;
+		set_mandelbrot(f);
 	}
-	else if (ft_strcmp(parameter, "Ted") == 0)
+	else if (ft_strcmp(parameter, "ted") == 0)
 	{
 		f->fractol = 3;
 	}
@@ -66,7 +81,7 @@ int		main(int ac, char **av)
 	if (ac != 2 || verify_param(f, av[1]) == 0)
 	{
 		ft_putendl("usage: ./fractol parameter\n");
-		ft_putendl("Available parameters:\n-> Julia\n-> Mandelbrot\n-> Ted\n");
+		ft_putendl("Available parameters:\n-> julia\n-> mandelbrot\n-> ted\n");
 		exit(1);
 	}
 	begin(f);
