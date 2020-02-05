@@ -6,82 +6,100 @@
 /*   By: tbergkul <tbergkul@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 13:19:08 by tbergkul          #+#    #+#             */
-/*   Updated: 2020/01/27 11:51:42 by tbergkul         ###   ########.fr       */
+/*   Updated: 2020/02/04 14:05:10 by tbergkul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
 
-void	set_julia(t_fractol *f)
-{
-	f->x0 = -4.0;
-	f->y0 = -2.5;
-	f->x1 = 2.5;
-	f->y1 = 3.0;
+/*
+**	Returns the absolute value of the long double value
+**	passed to the function.
+*/
 
-	f->cr = -0.63;
-	f->ci = -0.54;
-	f->maxi = 100;
-	f->zoom = 200;
-	f->i = 0;
+long double	abs_ld(long double n)
+{
+	return (n < 0 ? -n : n);
 }
 
-void	set_mandelbrot(t_fractol *f)
+/*
+**	Draws the pixel with a color depending on the fractol drawn.
+**	The pixel will be black if f->i == f->maxi.
+*/
+
+void		draw_pixel(t_fractol *f)
 {
-	// f->left = -1.75;
-	// f->top = -0.25;
-	// f->xside = 0.25;
-	// f->yside = 0.45;
-
-	// f->x0 = -1.75;
-	// f->y0 = -0.25;
-	// f->x1 = 0.25;
-	// f->y1 = 0.45;
-
-	f->x0 = -5.5;
-	f->y0 = -3.25;
-	f->x1 = 2.5;
-	f->y1 = 3.0;
-
-	f->maxi = 40;
-	f->zoom = 150;
-
-	f->xscale = f->x1 / f->width;//
-	f->yscale = f->y1 / f->height;//
+	if (f->i == f->maxi)
+		f->img_str[f->y * f->width + f->x] = 0;
+	else
+		f->img_str[f->y * f->width + f->x] = f->color * f->i;
 }
 
-int		verify_param(t_fractol *f, char *parameter)
+/*
+**	Resets the "default" values each time the a new fractol
+**	is going to be drawn.
+*/
+
+void		reset_values(t_fractol *f)
+{
+	if (f->fractol == 1)
+	{
+		f->color = 1800000;
+		f->cr = -1.076;
+		f->ci = 0.267000;
+		f->movex = 0;
+		f->movey = 0;
+		f->maxi = 50;
+		f->mouse_move = 0;
+	}
+	else if (f->fractol == 2)
+	{
+		f->color = 1795;
+		f->movex = -0.70;
+		f->movey = 0;
+		f->maxi = 50;
+	}
+	else if (f->fractol == 3)
+	{
+		f->color = 9830400;
+		f->movex = -0.55;
+		f->movey = -0.50;
+		f->maxi = 50;
+	}
+	f->zoom = 1;
+}
+
+/*
+**	Verify_param checks if the parameter passed to the program
+**	is valid or not and sets the variable f->fractol to either
+**	1, 2 or 3 depending on which fractol was chosen.
+*/
+
+int			verify_param(t_fractol *f, char *parameter)
 {
 	if (ft_strcmp(parameter, "julia") == 0)
-	{
 		f->fractol = 1;
-		set_julia(f);
-	}
 	else if (ft_strcmp(parameter, "mandelbrot") == 0)
-	{
 		f->fractol = 2;
-		set_mandelbrot(f);
-	}
-	else if (ft_strcmp(parameter, "ted") == 0)
-	{
+	else if (ft_strcmp(parameter, "burningship") == 0)
 		f->fractol = 3;
-	}
 	else
 		return (0);
 	return (1);
 }
 
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	t_fractol	*f;
 
-	system("clear");
 	if (!(f = (t_fractol *)malloc(sizeof(t_fractol))))
 		return (-1);
 	if (ac != 2 || verify_param(f, av[1]) == 0)
 	{
-		ft_putendl("usage: ./fractol parameter\n");
-		ft_putendl("Available parameters:\n-> julia\n-> mandelbrot\n-> ted\n");
+		ft_putendl("\033[36musage: ./fractol parameter\n");
+		ft_putendl("\033[33mAvailable parameters:\n");
+		ft_putendl("\033[35m-> julia\n\033[32m-> mandelbrot");
+		ft_putendl("\033[34m-> burningship\n");
 		exit(1);
 	}
 	begin(f);
